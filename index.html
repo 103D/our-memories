@@ -3,169 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For My Love</title>
-  <style>
-    body {
-      min-height: 200vh; /* Добавлено для возможности прокрутки */
-      background: linear-gradient(120deg, #fff0f6 0%, #ffe4ec 100%);
-      margin: 0;
-      font-family: 'Segoe Script', cursive, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 2em;
-    }
-    h1 {
-      color: #ff69b4;
-      text-shadow: 0 2px 8px #ffb6c1;
-      font-size: 3rem;
-      margin-bottom: 0.5em;
-      animation: fadeIn 2s ease-in forwards;
-    }
-    p {
-      color: #d6336c;
-      font-size: 1.5rem;
-      background: rgba(255,255,255,0.7);
-      padding: 1em 2em;
-      border-radius: 1em;
-      box-shadow: 0 2px 12px #ffb6c1;
-      animation: fadeIn 2s ease-in forwards;
-    }
-    img {
-      display: block;
-      margin: 2em auto;
-      max-width: 300px;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px #ffb6c1;
-      opacity: 0;
-      animation: fadeIn 2s ease-in forwards;
-      animation-delay: 1s;
-      animation-fill-mode: forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .glowing-heart {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 30px;
-      height: 30px;
-      background: radial-gradient(circle, #ffb6c1 0%, #ff69b4 100%);
-      border-radius: 50%;
-      box-shadow: 0 0 10px #ffb6c1, 0 0 20px #ff69b4;
-      animation: pulse 1.5s infinite alternate;
-      z-index: 9999;
-    }
-
-    @keyframes pulse {
-      from { transform: scale(1); }
-      to { transform: scale(1.2); }
-    }
-
-    .cherry-blossom {
-      position: fixed;
-      pointer-events: none;
-      z-index: 1000;
-      animation: fall linear forwards;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(100vh);
-      }
-    }
-
-    /* Letter popup */
-    #love-letter {
-      position: fixed;
-      bottom: 50px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255, 240, 245, 0.95);
-      border-radius: 20px;
-      padding: 20px 30px;
-      box-shadow: 0 4px 20px rgba(255, 182, 193, 0.8);
-      font-family: 'Segoe Script', cursive, sans-serif;
-      color: #d6336c;
-      text-align: center;
-      max-width: 90%;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 1s ease, transform 1s ease;
-      z-index: 1000;
-    }
-
-    #love-letter.visible {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(-10px);
-    }
-  </style>
+  <title>Our Memories</title>
+  <link rel="stylesheet" href="1.css">
 </head>
 <body>
+<div class="container">
+  <div class="main-content">
+    <h1>Our Beautiful Memories</h1>
+    
+    <div class="memory-card">
+      <p class="memory-text">Every moment with you feels like a beautiful dream...</p>
+      <div class="memory-date">Our First Date</div>
+    </div>
+    
+    <div class="image-container">
+      <!-- Images will be added dynamically by JavaScript -->
+      <div class="image-overlay">
+        <div class="heart-icon">❤️</div>
+        <div class="image-date">Click to see more memories</div>
+      </div>
+    </div>
 
-  <h1>To My Dearest</h1>
-  <p>You make my world sparkle and my heart flutter. This page is just for you. 💖</p>
-  <img src="photo.jpg" alt="Our Special Moment" />
+    <div class="memory-card">
+      <p class="memory-text">Your smile brightens my darkest days...</p>
+      <div class="memory-date">Our First Kiss</div>
+    </div>
 
-  <audio autoplay loop>
+    <div class="floating-hearts"></div>
+  </div>
+</div>
+
+<div id="love-letter">
+  <div class="letter-content">
+    <p>My Love,</p>
+    <p>From the moment I met you, my heart knew you were special. Every day with you is a new adventure, a new reason to smile, a new memory to cherish.</p>
+    <p>You make my world complete.</p>
+    <p>Forever Yours,</p>
+    <p class="signature">[Your Name]</p>
+  </div>
+</div>
+
+<div class="music-player">
+  <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
+  <button id="play-music-btn">Play Our Song</button>
+  <div class="song-title">Our Special Song</div>
+</div>
 
-  <div class="glowing-heart"></div>
+<div class="glowing-heart"></div>
 
-  <!-- Love Letter -->
-  <div id="love-letter">
-    <div class="letter-content">
-      <p>
-        From the moment I met you, my heart quietly holds hope.<br>
-        Your smile brightens my days, and you are the brightest gift in my life.<br>
-        This little page is a small sign of my sincere feelings and support.<br>
-        Wishing you the best of luck on your exam — I believe you will do great!<br>
-        May all your dreams come true.
-      </p>
-    </div>
-  </div>
-  
+<div class="floating-messages"></div>
 
-  <!-- Falling petals -->
-  <script>
-    function createCherryBlossom() {
-      const petal = document.createElement('div');
-      petal.className = 'cherry-blossom';
-      petal.style.left = Math.random() * 100 + 'vw';
-      petal.style.top = '-20px';
-      petal.style.width = '20px';
-      petal.style.height = '20px';
-      petal.style.background = 'radial-gradient(circle, #ffb6c1 0%, #ff69b4 100%)';
-      petal.style.borderRadius = '50%';
-      petal.style.opacity = '0.7';
-      petal.style.animationDuration = (Math.random() * 3 + 2) + 's';
-      document.body.appendChild(petal);
-      setTimeout(() => petal.remove(), 5000);
+<!-- All scripts -->
+<script src="script.js"></script>
+<script src="romantic-cursor.js"></script>
+<script>
+  // Cherry blossoms
+  function createCherryBlossom() {
+    const petal = document.createElement('div');
+    petal.className = 'cherry-blossom';
+    petal.style.left = Math.random() * 100 + 'vw';
+    petal.style.top = '-20px';
+    petal.style.width = '20px';
+    petal.style.height = '20px';
+    petal.style.background = 'radial-gradient(circle, #ffb6c1 0%, #ff69b4 100%)';
+    petal.style.borderRadius = '50%';
+    petal.style.opacity = '0.7';
+    petal.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), 5000);
+  }
+  setInterval(createCherryBlossom, 300);
+
+  // Love letter appearance
+  window.addEventListener('scroll', () => {
+    const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    const letter = document.getElementById('love-letter');
+    if (scrollPercent > 0.6) {
+      letter.classList.add('visible');
+    } else {
+      letter.classList.remove('visible');
     }
-    setInterval(createCherryBlossom, 300);
-  </script>
+  });
 
-  <!-- Scroll trigger for love letter -->
-  <script>
-    window.addEventListener('scroll', () => {
-      const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-      const letter = document.getElementById('love-letter');
-      if (scrollPercent > 0.6) {
-        letter.classList.add('visible');
-      } else {
-        letter.classList.remove('visible');
-      }
+  // Music autoplay
+  window.addEventListener('DOMContentLoaded', () => {
+    const music = document.getElementById('bg-music');
+    const btn = document.getElementById('play-music-btn');
+
+    music.play().catch(() => {
+      btn.style.display = 'block';
     });
-  </script>
 
-  <script src="romantic-cursor.js"></script>
+    btn.addEventListener('click', () => {
+      music.play();
+      btn.style.display = 'none';
+    });
+  });
+</script>
 </body>
 </html>
